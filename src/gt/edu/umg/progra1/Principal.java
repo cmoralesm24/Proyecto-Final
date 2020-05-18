@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Scanner;
 
 /*
-        ejemplogithub
  * @author daniel10522
  */
 public class Principal {
