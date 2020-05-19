@@ -101,16 +101,8 @@ public class Atributos {
         return bytes;
     }
 
-    public void setBytes(int bytes) {
-        this.bytes = bytes;
-    }
-
     public boolean isRequiereLongitud() {
         return requiereLongitud;
-    }
-
-    public void setRequiereLongitud(boolean requiereLongitud) {
-        this.requiereLongitud = requiereLongitud;
     }
 
     public byte[] getBytesNombre() {
@@ -125,11 +117,5 @@ public class Atributos {
     public TipoDato getTipoDato() {
         return tipoDato;
     }
-
-    public void setTipoDato(TipoDato tipoDato) {
-        this.tipoDato = tipoDato;
-    }
-    
-    
 
 }

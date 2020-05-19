@@ -31,6 +31,11 @@ public class Entidad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+        bytesNombre = new byte[30];
+        for(int i=0; i<nombre.length(); i++){
+            bytesNombre[i] = (byte)nombre.charAt(i);
+        }
+        
     }
 
     public int getCantidad() {
