@@ -24,7 +24,7 @@ public class Entidad {
     public void setIndice(int indice) {
         this.indice = indice;
     }
-
+ 
     public String getNombre() {
         return nombre;
     }
@@ -34,8 +34,7 @@ public class Entidad {
         bytesNombre = new byte[30];
         for(int i=0; i<nombre.length(); i++){
             bytesNombre[i] = (byte)nombre.charAt(i);
-        }
-        
+        }     
     }
 
     public int getCantidad() {
@@ -45,7 +44,7 @@ public class Entidad {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-
+   
     public long getPosicion() {
         return posicion;
     }
@@ -53,23 +52,28 @@ public class Entidad {
     public void setPosicion(long posicion) {
         this.posicion = posicion;
     }
-
+    
     public byte[] getBytesNombre() {
         return bytesNombre;
     }
 
     public void setBytesNombre(byte[] bytesNombre) {
         this.bytesNombre = bytesNombre;
+        nombre = new String(bytesNombre);
     }
-
-    public int getBytes() {
-        return bytes;
+    
+    public int getBytes() {	
+	bytes = 1;
+	for (Atributos atributo : atributos) {
+            bytes += atributo.getBytes();
+	}
+	return bytes;
     }
-
+   
     public void setBytes(int bytes) {
         this.bytes = bytes;
     }
-
+    
     public List<Atributos> getAtributos() {
         return atributos;
     }
@@ -77,7 +81,7 @@ public class Entidad {
     public void setAtributos(List<Atributos> atributos) {
         this.atributos = atributos;
     }
-    
+        
     public void setAtributo(Atributos atributo){
         if(this.atributos == null){
             this.atributos = new ArrayList<>();
@@ -92,8 +96,7 @@ public class Entidad {
                 this.atributos.remove(atributo);
                 this.cantidad = this.atributos.size();
             }
-        }
-            
+        }      
     }
      
 }
