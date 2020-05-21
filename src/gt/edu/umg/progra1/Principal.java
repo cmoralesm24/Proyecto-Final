@@ -17,9 +17,9 @@ import java.util.Scanner;
 public class Principal {
     Scanner sc = new Scanner (System.in);
     RandomAccessFile fichero = null, entidades = null, atributos = null;
-    private final String rutaBase = "C:\\Users\\daniel10522\\Desktop\\Proyecto2";
-    private final String rutaEntidades = "C:\\Users\\daniel10522\\Desktop\\Proyecto2\\entidades.dat";
-    private final String rutaAtributos = "C:\\Users\\daniel10522\\Desktop\\Proyecto2\\atributos.dat";  
+    private final String rutaBase = "C:\\Users\\daniel10522\\Desktop\\Proyecto_Final\\Proyecto2";
+    private final String rutaEntidades = "C:\\Users\\daniel10522\\Desktop\\Proyecto_Final\\Proyecto2\\entidades.dat";
+    private final String rutaAtributos = "C:C:\\Users\\daniel10522\\Desktop\\Proyecto_Final\\Proyecto2\\atributos.dat";  
     private final int totalBytes = 83, bytesEntidades = 47, bytesAtributo = 43;
     private final static String formatoFecha = "dd/mm/yy";
     static DateFormat format = new SimpleDateFormat(formatoFecha);
