@@ -19,7 +19,7 @@ public class Principal {
     RandomAccessFile fichero = null, entidades = null, atributos = null;
     private final String rutaBase = "C:\\Users\\daniel10522\\Desktop\\Proyecto_Final\\Proyecto2";
     private final String rutaEntidades = "C:\\Users\\daniel10522\\Desktop\\Proyecto_Final\\Proyecto2\\entidades.dat";
-    private final String rutaAtributos = "C:C:\\Users\\daniel10522\\Desktop\\Proyecto_Final\\Proyecto2\\atributos.dat";  
+    private final String rutaAtributos = "C:\\Users\\daniel10522\\Desktop\\Proyecto_Final\\Proyecto2\\atributos.dat";  
     private final int totalBytes = 83, bytesEntidades = 47, bytesAtributo = 43;
     private final static String formatoFecha = "dd/mm/yy";
     static DateFormat format = new SimpleDateFormat(formatoFecha);
@@ -313,6 +313,7 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
                 break;
 
             case 2:
+                modificarEntidad();
                 break;
 
             case 3:
@@ -449,8 +450,8 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
                     System.out.println("Seleccione una Opcion");
                     System.out.println("1---Agregar");
                     System.out.println("2---Listar");
-                    System.out.println("3---Buscar");
-                    System.out.println("4---Modificar");
+                    System.out.println("3---Modificar"); 
+                    System.out.println("4---Eliminar");
                     System.out.println("0---Regresar al Menu Anterior");
                     opcion = sc.nextInt();
                     switch(opcion){
@@ -467,17 +468,10 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
                              break;
                         
                         case 3:
-                            System.out.println("Se hara la busqueda en la primera columna ");
-                            System.out.println("Ingree "+ a.getNombre().trim() + " a buscar");
-                          // sc.nextLine();
-                           //encontrarRegistros(carne);
-                           break;
-                        
-                       case 4:
-                            System.out.println("Ingrese el care a modificar: ");
+                            System.out.println("Ingrese el carne a modificar: ");
                             //carne = sc.nextInt();
                             //sc.nextLine();
-                            //modificarRegistros(carne);
+                            modificarRegistros();
                             break;
                         
                         default:
@@ -587,6 +581,20 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
         return resultado;
     }
     
+    //Metodo para Modificar Registros
+    public void modificarRegistros(){
+        
+    }
+    
+    
+    //Metodo para Eliminar Registros
+        public void eliminarRegistros(){
+            
+            
+            
+        }
+        
+    //Metodo para Listar Registros
     public void listarRegistros(Entidad entidad){
         try{
             long longitud = fichero.length();
@@ -652,44 +660,7 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
             System.out.println("Error: "+ e.getMessage());
         }
     }
-    
-  /*  public void encontrarRegistro(int carne){
-        try{
-            long longitud = fichero.length();
-            if(longitud<=0){
-                System.out.println("Na Hay Registros");
-                return;
-            }
-            boolean bndEncontrado = false;
-            fichero.seek(0);
-            Alumno a = new Alumno();
-            while(longitud>= totalBytes){
-                a.setCarne(fichero.readInt());
-                byte[] bNombre = new byte[50];
-                fichero.read(bNombre);
-                a.setBytesNombre(bNombre);
-                byte[] bFecha = new byte[28];
-                fichero.read(bFecha);
-                fichero.readByte();
-                a.setBytesFechaNacimiento(bFecha);
-                if(a.getCarne()== carne){
-                    System.out.println("Carne: "+ a.getCarne());
-                    System.out.println("Nombre: "+ a.getNombre);
-                    System.out.println("Fecha de Nacimiento: "+ dateToString(a.getFechaNacimiento()));
-                    bndEncontrado = true;
-                    break;
-                }
-                longitud -= totalBytes;
-            }
-            
-        }catch(Exception e){
-            System.out.println("Error: "+ e.getMessage());
-        }
-        if(!bndEncontrado){
-            System.out.println("El carne ingreaso no existe, por favor verifique");
-        }
-    }*/
-    
+        
     public Date stringToDate(String strFecha){
         Date date = null;
         try{
