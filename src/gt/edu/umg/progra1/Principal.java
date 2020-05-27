@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /*
  * @author daniel10522
@@ -44,7 +45,7 @@ public class Principal {
             atributos = new RandomAccessFile(rutaAtributos, "rw");
             long longitud = entidades.length();
             if(longitud <= 0){
-                System.out.println("No Exisen Refistros");
+                JOptionPane.showMessageDialog(null, "NO EXISTEN REGISTROS", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
                 respuesta = false;
             }
             if(longitud >= bytesEntidades){
@@ -64,7 +65,7 @@ public class Principal {
                     
                     long longitudAtributos = atributos.length();
                     if(longitudAtributos <= 0){
-                        System.out.println("No Existen Registros");
+                        JOptionPane.showMessageDialog(null, "NO EXISTEN REGISTROS", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
                         respuesta = false;
                         break;
                     }
@@ -119,37 +120,35 @@ public class Principal {
         try{
             Entidad entidad = new Entidad();
             entidad.setIndice(listaEntidades.size() + 1);
-            System.out.println("Ingrese el Nombre de la Entidad");
             String strNombre = "";
             int longitud = 0;
             do{ 
-                 strNombre = sc.nextLine();
+                 strNombre = JOptionPane.showInputDialog(null, "Ingrese el Nombre de la Entidad");
                 longitud = strNombre.length();
                 if(longitud < 2 || longitud > 30){
-                    System.out.println("La longitud del Nombre no es Valida (3-30)");                
+                    JOptionPane.showMessageDialog(null, "La longitud del Nombre no es Valida (3-30)", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);                
                 }else{
                     if(strNombre.contains(" ")){
-                        System.out.println("El Nombre no Puede Tener Espacios, Sustituya con guion bajo");
+                       JOptionPane.showMessageDialog(null, "El Nombre no Puede Tener Espacios, Sustituya con guion bajo", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
                         longitud = 0;
                     }
                 }  
             }while(longitud < 2 || longitud>30);
             entidad.setNombre(strNombre);
-            System.out.println("Atributos de la Entidad");
+            //System.out.println("Atributos de la Entidad");
             int bndDetener = 0;
             do{
                 Atributos atributos = new Atributos();
                 atributos.setIndice(entidad.getIndice());
                 longitud = 0;
-                System.out.println("Escriba el Nombre del Atributo no. "+ (entidad.getCantidad()+1));
                 do{
-                    strNombre = sc.nextLine();
+                    strNombre = JOptionPane.showInputDialog(null, "Escriba el Nombre del Atributo no. "+ (entidad.getCantidad()+1));
                     longitud = strNombre.length();
                     if(longitud<2 || longitud>30){
-                         System.out.println("La Longitud del Nombre no es Valida (3 - 30)");     
+                         JOptionPane.showMessageDialog(null, "La Longitud del Nombre no es Valida (3 - 30)", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);     
                     }else{
                         if(strNombre.contains(" ")){
-                            System.out.println("El Nombre no debe contener espacios, utilize guion bajo ");
+                            JOptionPane.showMessageDialog(null, "El Nombre no debe contener espacios, utilize guion bajo ","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                              longitud = 0;
                         }
                     }  
@@ -172,13 +171,12 @@ public class Principal {
                 }
                 atributos.setNombreTipoDato();
                 entidad.setAtributo(atributos);
-                System.out.println("Desea agregar otro atributo presione cualquier numero, de lo contrario 0");
-                bndDetener = sc.nextInt();
+                bndDetener = Integer.parseInt(JOptionPane.showInputDialog(null,"¿Desea agregar otro atributo?\n presione cualquier numero\n, de lo contrario 0"));
             }while(bndDetener != 0);
-             System.out.println("Los Datos a Registrar Son: ");
             mostrarEntidades(entidad);
-            System.out.println("Presione 1 para guardar 0 para cancelar");
-            longitud = sc.nextInt();
+            //System.out.println("Presione 1 para guardar 0 para cancelar");
+            longitud = Integer.parseInt(JOptionPane.showInputDialog(null, "Esta Seguro de Registrar los Datos?\n"
+                    + "1->>Guardar\n 0-->>Cancelar"));
             if(longitud == 1){
                 entidad.setPosicion(atributos.length());
                 atributos.seek(atributos.length());
@@ -198,7 +196,7 @@ public class Principal {
                 listaEntidades.add(entidad);
                 resultado = true;    
             }else{
-                System.out.println("No se ha Guardado la Entidad porque el Usuario decidio Cancelar");
+                JOptionPane.showMessageDialog(null ,"No se ha Guardado la Entidad porque el Usuario decidio Cancelar", "ERROR", JOptionPane.ERROR_MESSAGE);
                 resultado = false;
             }    
             System.out.println("Presione una tecla para continuar...");
@@ -232,7 +230,7 @@ public class Principal {
        long longitudDatos = fichero.length();
        fichero.close();
        if(longitudDatos > 0){
-           System.out.println("La Entidad no se Puede Modificar porque ya Tiene Datos");      
+           JOptionPane.showMessageDialog(null, "La Entidad no se Puede Modificar porque ya Tiene Datos");      
        }else{
            boolean bdnEncontrado = false, bdnModificado = false;
            entidades.seek(0);
@@ -250,7 +248,7 @@ public class Principal {
                e.setBytes(entidades.readInt());
                e.setPosicion(entidades.readLong());
                if(entidad.getIndice() == e.getIndice()){
-                   System.out.println("Si no desea Modificar el Cmapo Prsione Enter");
+                   System.out.println("Si no desea Modificar el Campo Prsione Enter");
                    System.out.println("Ingrese el Nombre");
                    String tmpStr = "";
                    int len = 0;
@@ -259,7 +257,7 @@ public class Principal {
                         tmpStr = sc.nextLine();
                          len = tmpStr.length();
                         if(len== 1 || len>30){
-                           System.out.println("La Longitud no es Valida (2 - 30)");
+                           JOptionPane.showMessageDialog(null, "La Longitud no es Valida (2 - 30)");
                         }      
                     }while(len==1 || len>30);
                     if(len > 0){
@@ -288,18 +286,17 @@ public class Principal {
 }   
    
 private void menuDefinicion(boolean mostrarAgregarRegistros){
-    int opcion = 1;
-    while(opcion != 0){ 
-        System.out.println("Elija una opcion");
-        System.out.println("1---Agregar Entidad");
-        System.out.println("2---Modificar Entidad");
-        System.out.println("3---listar Entidad");
-        if(mostrarAgregarRegistros){
-            System.out.println("4---Agregar Registros");
-        }
-            System.out.println("5---Eliminar Bases de Datos");
-            System.out.println("0---Salir");
-            opcion = sc.nextInt();
+    int opcion = 0;
+    while(opcion !=6){ 
+        try{
+            opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
+                    "Elija una opcion\n" 
+                    +"1---Agregar Entidad\n"
+                    +"2---Modificar Entidad\n"
+                    + "3---listar Entidad\n"
+                    +"4---Agregar Registros\n"
+                    +"5---Eliminar Bases de Datos\n"
+                    + "6---Salir", "Menu de Opciones",3));
         switch(opcion){
             case 0:
                 System.out.println("Bye Bye");
@@ -307,7 +304,7 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
 
             case 1:
                 if(agregarEntidad()){
-                    System.out.println("Entidad Agregada con Exito");
+                    JOptionPane.showMessageDialog(null, "Entidad Agregada Con Exito", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
                     mostrarAgregarRegistros = true;
                 }
                 break;
@@ -368,7 +365,10 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
                 System.out.println("Opcion Invalida");
                 break;
         }
-    }       
+      }catch(Exception e){
+      JOptionPane.showMessageDialog(null, "Error"+ e.getMessage());
+    }
+        }       
 }
 
     private void cerrarArchivos(){
@@ -429,7 +429,7 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
 	return nombre.trim() + ".dat";
     }
     
-   //metodos para guardar registros 
+   //METODO PARA GRABAR REGISTROS
     private void iniciar(int indice){
         int opcion = 0;
          String nombreFichero = "";
