@@ -171,12 +171,12 @@ public class Principal {
                 }
                 atributos.setNombreTipoDato();
                 entidad.setAtributo(atributos);
-                bndDetener = Integer.parseInt(JOptionPane.showInputDialog(null,"¿Desea agregar otro atributo?\n presione cualquier numero\n, de lo contrario 0"));
+                bndDetener = Integer.parseInt(JOptionPane.showInputDialog(null,"¿Desea agregar otro atributo?\n Si presione cualquier numero\n, No presione 0"));
             }while(bndDetener != 0);
             mostrarEntidades(entidad);
             //System.out.println("Presione 1 para guardar 0 para cancelar");
             longitud = Integer.parseInt(JOptionPane.showInputDialog(null, "Esta Seguro de Registrar los Datos?\n"
-                    + "1->>Guardar\n 0-->>Cancelar"));
+                    + "1->>Guardar\n0-->>Cancelar"));
             if(longitud == 1){
                 entidad.setPosicion(atributos.length());
                 atributos.seek(atributos.length());
@@ -298,11 +298,8 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
                     +"5---Eliminar Bases de Datos\n"
                     + "6---Salir", "Menu de Opciones",3));
         switch(opcion){
-            case 0:
-                System.out.println("Bye Bye");
-                break;
-
             case 1:
+                //Agregar Entidad
                 if(agregarEntidad()){
                     JOptionPane.showMessageDialog(null, "Entidad Agregada Con Exito", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
                     mostrarAgregarRegistros = true;
@@ -310,14 +307,16 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
                 break;
 
             case 2:
+                //Modificar Entidad
                 modificarEntidad();
                 break;
 
             case 3:
+                //Listar Entidad
                    if(listaEntidades.size()>0){
                        int tmpInt = 0;
                        System.out.println("Desea imprimir los detalles. Si, presione 1. No, presione 0?");
-                       tmpInt = sc.nextInt();
+                       tmpInt = Integer.parseInt(JOptionPane.showInputDialog(null, "¿Desea imprimir los detalles?\n Si, presione 1.\nNo, presione 0?" ));
                        if(tmpInt == 1){
                            for(Entidad entidad : listaEntidades){
                                mostrarEntidades(entidad);
@@ -335,6 +334,7 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
                    break;
 
             case 4:
+                //Agregar Registro
                 int indice = 0;
                 while(indice<1 || indice>listaEntidades.size()){
                     for(Entidad entidad : listaEntidades){
@@ -345,28 +345,32 @@ private void menuDefinicion(boolean mostrarAgregarRegistros){
                 }
                 iniciar(indice);
                 break;
-
+            
             case 5:
+                //ELiminar Base de Datos
                 int confirmar = 0;
-                System.out.println("Esta seguro de borrar los archivos de base de datos, presione 1 de lo contrario cualquier numero para cancelar? Esta accion no se podra reversar");
-                confirmar = sc.nextInt();
+                confirmar = Integer.parseInt(JOptionPane.showInputDialog(null, "Esta seguro de borrar los archivos de base de datos, presione 1 de lo contrario cualquier numero para cancelar?\n Esta accion no se podra reversar", "ADVERTENCIA",JOptionPane.WARNING_MESSAGE ));
                 if(confirmar == 1){
                     cerrarArchivos();
                         if(borrarArchivos()){
                             listaEntidades = null;
                             listaEntidades = new ArrayList<>();
                             mostrarAgregarRegistros = false;
-                            System.out.println("Archivos Borrados");
+                            JOptionPane.showMessageDialog(null,"Base de Datos Eliminada con Exito", "ELIMINAR", JOptionPane.INFORMATION_MESSAGE);
                         }
                 }
                 break;
+                
+            case 6:
+                JOptionPane.showMessageDialog(null, "Gracias por Utilizar Nuestro Sistema");
+                break;
 
             default:
-                System.out.println("Opcion Invalida");
+                JOptionPane.showMessageDialog(null, "Opcion Invalida", "ERROR", JOptionPane.ERROR_MESSAGE);
                 break;
         }
       }catch(Exception e){
-      JOptionPane.showMessageDialog(null, "Error"+ e.getMessage());
+      JOptionPane.showMessageDialog(null, "Debe Seleccionar Una Opcion", "ERROR", JOptionPane.ERROR_MESSAGE);
     }
         }       
 }
