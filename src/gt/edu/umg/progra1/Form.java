@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
 package gt.edu.umg.progra1;
 
 import java.io.File;
@@ -17,7 +14,6 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author daniel10522
  */
 public class Form extends javax.swing.JFrame {
@@ -176,7 +172,8 @@ Scanner sc = new Scanner (System.in);
             atributos = new RandomAccessFile(rutaAtributos, "rw");
             long longitud = entidades.length();
             if(longitud <= 0){
-                JOptionPane.showMessageDialog(null, "NO EXISTEN REGISTROS", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "NO EXISTEN REGISTROS", 
+                        "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
                 respuesta = false;
             }
             if(longitud >= bytesEntidades){
@@ -196,7 +193,8 @@ Scanner sc = new Scanner (System.in);
                     
                     long longitudAtributos = atributos.length();
                     if(longitudAtributos <= 0){
-                        JOptionPane.showMessageDialog(null, "NO EXISTEN REGISTROS", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "NO EXISTEN REGISTROS", 
+                                "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
                         respuesta = false;
                         break;
                     }
@@ -256,15 +254,16 @@ Scanner sc = new Scanner (System.in);
             String strNombre = "";
             int longitud = 0;
             do{ 
-                 strNombre = JOptionPane.showInputDialog(null, "Ingrese el Nombre de la Entidad");
+                 strNombre = JOptionPane.showInputDialog(null, "Ingrese el Nombre de la Entidad",
+                         "NOMBRE ENTIDAD", JOptionPane.INFORMATION_MESSAGE);
                 longitud = strNombre.length();
                 if(longitud < 2 || longitud > 30){
                     JOptionPane.showMessageDialog(null, "La longitud del Nombre no es Valida (3-30)", 
-                            "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);                
+                            "ERROR", JOptionPane.ERROR_MESSAGE);                
                 }else{
                     if(strNombre.contains(" ")){
                        JOptionPane.showMessageDialog(null, "El Nombre no Puede Tener Espacios, "
-                               + "Sustituya con guion bajo", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
+                               + "Sustituya con guion bajo", "ERROR", JOptionPane.ERROR_MESSAGE);
                         longitud = 0;
                     }
                 }  
@@ -277,15 +276,15 @@ Scanner sc = new Scanner (System.in);
                 longitud = 0;
                 do{
                     strNombre = JOptionPane.showInputDialog(null, "Escriba el Nombre del Atributo no. "
-                            + (entidad.getCantidad()+1));
+                            + (entidad.getCantidad()+1)+"ATRIBUTO", JOptionPane.INFORMATION_MESSAGE);
                     longitud = strNombre.length();
                     if(longitud<2 || longitud>30){
                          JOptionPane.showMessageDialog(null, "La Longitud del Nombre no es Valida (3 - 30)", 
-                                 "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);     
+                                 "ERROR", JOptionPane.ERROR_MESSAGE);     
                     }else{
                         if(strNombre.contains(" ")){
                             JOptionPane.showMessageDialog(null, "El Nombre no debe contener espacios, utilize guion bajo ",
-                                    "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                                    "ERROR", JOptionPane.ERROR_MESSAGE);
                              longitud = 0;
                         }
                     }  
@@ -301,23 +300,23 @@ Scanner sc = new Scanner (System.in);
                 txtArea.append("        "+TipoDato.CHAR.getValue() + " .......... " + TipoDato.CHAR.name()+"\n");
                 txtArea.append(" \n");
                 atributos.setValorTipoDato(Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese Tipo de Dato", 
-                            "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE)));
+                            "TIPO DE DATO", JOptionPane.INFORMATION_MESSAGE)));
                 if(atributos.isRequiereLongitud()){
                     //System.out.println("Ingrese la Longitud");
                     atributos.setLongitud(Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese la longitud", 
-                            "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE)));
+                            "LONGITUD", JOptionPane.INFORMATION_MESSAGE)));
                 }else{
                     atributos.setLongitud(0);
                 }
                 atributos.setNombreTipoDato();
                 entidad.setAtributo(atributos);
                 bndDetener = Integer.parseInt(JOptionPane.showInputDialog(null,"¿Desea agregar otro atributo?\n"
-                        + "Si presione cualquier numero\nNo presione 0"));
+                        + "Si presione cualquier numero\nNo presione 0","INTERROGANTE", JOptionPane.QUESTION_MESSAGE));
             }while(bndDetener != 0);
             mostrarEntidades(entidad);
             //System.out.println("Presione 1 para guardar 0 para cancelar");
             longitud = Integer.parseInt(JOptionPane.showInputDialog(null, "Esta Seguro de Registrar los Datos?\n"
-                    + "1->>Guardar\n0-->>Cancelar"));
+                    + "1->>Guardar\n0-->>Cancelar","INTERROGANTE", JOptionPane.QUESTION_MESSAGE));
             if(longitud == 1){
                 entidad.setPosicion(atributos.length());
                 atributos.seek(atributos.length());
@@ -438,13 +437,13 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                     +"3---Listar Entidad\n"
                     +"4---Agregar Registros\n"
                     +"5---Eliminar Bases de Datos\n"
-                    + "6---Salir", "MENU DE OPCIONES",3));
+                    + "6---Salir", "MENU DE OPCIONES",JOptionPane.INFORMATION_MESSAGE));
         switch(opcion){
             case 1:
                 //Agregar Entidad
                 if(agregarEntidad()){
                     JOptionPane.showMessageDialog(null, "Entidad Agregada Con Exito", 
-                            "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
+                            "ENTIDAD AGREGADA", JOptionPane.INFORMATION_MESSAGE);
                     mostrarAgregarRegistros = true;
                 }
                 break;
@@ -459,7 +458,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                    if(listaEntidades.size()>0){
                        int tmpInt = 0;                       
                        tmpInt = Integer.parseInt(JOptionPane.showInputDialog(null, "¿Desea imprimir los detalles?\n"
-                               +"Si, presione 1.\nNo, presione 0."));
+                               +"Si, presione 1.\nNo, presione 0.", "INTERROGANTE", JOptionPane.QUESTION_MESSAGE));
                        if(tmpInt == 1){
                            for(Entidad entidad : listaEntidades){
                                mostrarEntidades(entidad);
@@ -473,7 +472,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                        }
                    }else{
                        JOptionPane.showMessageDialog(null, "No Hay Entidades Registradas ", 
-                               "INFORMACION",JOptionPane.INFORMATION_MESSAGE);
+                               "IMPORTANTE",JOptionPane.INFORMATION_MESSAGE);
                    }
                    break;
 
@@ -486,7 +485,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                         txtArea.append("     "+entidad.getIndice() + "---" + entidad.getNombre()+"\n");
                     }                  
                     indice = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione la Entidad", 
-                            "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE));
+                            "SELECCIONAR", JOptionPane.INFORMATION_MESSAGE));
                 }
                 iniciar(indice);
                 break;
@@ -511,7 +510,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                 
             case 6:
                 JOptionPane.showMessageDialog(null, "Gracias por Utilizar Nuestro Sistema", 
-                        "HASTA PRONTO", JOptionPane.INFORMATION_MESSAGE);
+                        "HASTA PRONTO", JOptionPane.CLOSED_OPTION);
                 break;
 
             default:
@@ -606,7 +605,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                             + "2---Listar\n"
                             + "3---Modificar\n"
                             + "4---Eiminar\n"
-                            + "0---Regresar al Menu Anterior","BIENVENIDO", 3));
+                            + "0---Regresar al Menu Anterior","BIENVENIDO", JOptionPane.INFORMATION_MESSAGE));
                     switch(opcion){
                         case 0:
                             System.out.println("");
@@ -632,7 +631,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                             break;
                     }                  
                 }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Eliga una Opcion", 
+                    JOptionPane.showMessageDialog(null, "Debe de Elegir una Opcion", 
                             "ERROR", JOptionPane.ERROR_MESSAGE);
                 }           
             }while(opcion != 0);           
@@ -828,7 +827,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
             date = format.parse(strFecha);
         }catch(Exception e){
             date = null;
-            JOptionPane.showMessageDialog(null, "Error en Fecha"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error en Fecha"+ e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return date;
     }
