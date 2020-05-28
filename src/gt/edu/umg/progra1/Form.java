@@ -53,6 +53,7 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
+        txtArea.setBackground(javax.swing.UIManager.getDefaults().getColor("TabbedPane.background"));
         txtArea.setColumns(20);
         txtArea.setRows(5);
         jScrollPane1.setViewportView(txtArea);
@@ -65,19 +66,19 @@ public class Form extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
+                        .addGap(201, 201, 201)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -229,6 +230,7 @@ Scanner sc = new Scanner (System.in);
     }
     
     private void mostrarEntidades(Entidad entidad){
+        txtArea.append("----------------------------------\n");
         txtArea.append("Indice: "+ entidad.getIndice()+"\n");
         //System.out.println("Indice: "+ entidad.getIndice());
          txtArea.append("Nombre: "+ entidad.getNombre()+"\n");
@@ -257,43 +259,49 @@ Scanner sc = new Scanner (System.in);
                  strNombre = JOptionPane.showInputDialog(null, "Ingrese el Nombre de la Entidad");
                 longitud = strNombre.length();
                 if(longitud < 2 || longitud > 30){
-                    JOptionPane.showMessageDialog(null, "La longitud del Nombre no es Valida (3-30)", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);                
+                    JOptionPane.showMessageDialog(null, "La longitud del Nombre no es Valida (3-30)", 
+                            "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);                
                 }else{
                     if(strNombre.contains(" ")){
-                       JOptionPane.showMessageDialog(null, "El Nombre no Puede Tener Espacios, Sustituya con guion bajo", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null, "El Nombre no Puede Tener Espacios, "
+                               + "Sustituya con guion bajo", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
                         longitud = 0;
                     }
                 }  
             }while(longitud < 2 || longitud>30);
             entidad.setNombre(strNombre);
-            //System.out.println("Atributos de la Entidad");
             int bndDetener = 0;
             do{
                 Atributos atributos = new Atributos();
                 atributos.setIndice(entidad.getIndice());
                 longitud = 0;
                 do{
-                    strNombre = JOptionPane.showInputDialog(null, "Escriba el Nombre del Atributo no. "+ (entidad.getCantidad()+1));
+                    strNombre = JOptionPane.showInputDialog(null, "Escriba el Nombre del Atributo no. "
+                            + (entidad.getCantidad()+1));
                     longitud = strNombre.length();
                     if(longitud<2 || longitud>30){
-                         JOptionPane.showMessageDialog(null, "La Longitud del Nombre no es Valida (3 - 30)", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);     
+                         JOptionPane.showMessageDialog(null, "La Longitud del Nombre no es Valida (3 - 30)", 
+                                 "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);     
                     }else{
                         if(strNombre.contains(" ")){
-                            JOptionPane.showMessageDialog(null, "El Nombre no debe contener espacios, utilize guion bajo ","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "El Nombre no debe contener espacios, utilize guion bajo ",
+                                    "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                              longitud = 0;
                         }
                     }  
                 }while(longitud < 2 || longitud > 30);
                 atributos.setNombre(strNombre);
                 txtArea.append("SELECCIONE TIPO DE DATO\n");
-                txtArea.append(TipoDato.INT.getValue() + " .......... " + TipoDato.INT.name()+"\n");
-                txtArea.append(TipoDato.LONG.getValue() + " .......... " + TipoDato.LONG.name()+"\n");
-                txtArea.append(TipoDato.STRING.getValue() + " .......... " + TipoDato.STRING.name()+"\n");
-                txtArea.append(TipoDato.DOUBLE.getValue() + " .......... " + TipoDato.DOUBLE.name()+"\n");
-                txtArea.append(TipoDato.FLOAT.getValue() + " .......... " + TipoDato.FLOAT.name()+"\n");
-                txtArea.append(TipoDato.DATE.getValue() + " .......... " + TipoDato.DATE.name()+"\n");
-                txtArea.append(TipoDato.CHAR.getValue() + " .......... " + TipoDato.CHAR.name()+"\n");
-                atributos.setValorTipoDato(sc.nextInt());
+                txtArea.append("        "+TipoDato.INT.getValue() + " .......... " + TipoDato.INT.name()+"\n");
+                txtArea.append("        "+TipoDato.LONG.getValue() + " .......... " + TipoDato.LONG.name()+"\n");
+                txtArea.append("        "+TipoDato.STRING.getValue() + " .......... " + TipoDato.STRING.name()+"\n");
+                txtArea.append("        "+TipoDato.DOUBLE.getValue() + " .......... " + TipoDato.DOUBLE.name()+"\n");
+                txtArea.append("        "+TipoDato.FLOAT.getValue() + " .......... " + TipoDato.FLOAT.name()+"\n");
+                txtArea.append("        "+TipoDato.DATE.getValue() + " .......... " + TipoDato.DATE.name()+"\n");
+                txtArea.append("        "+TipoDato.CHAR.getValue() + " .......... " + TipoDato.CHAR.name()+"\n");
+                txtArea.append(" \n");
+                atributos.setValorTipoDato(Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese Tipo de Dato", 
+                            "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE)));
                 if(atributos.isRequiereLongitud()){
                     //System.out.println("Ingrese la Longitud");
                     atributos.setLongitud(Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese la longitud", 
@@ -304,7 +312,7 @@ Scanner sc = new Scanner (System.in);
                 atributos.setNombreTipoDato();
                 entidad.setAtributo(atributos);
                 bndDetener = Integer.parseInt(JOptionPane.showInputDialog(null,"¿Desea agregar otro atributo?\n"
-                        + "Si presione cualquier numero\n, No presione 0"));
+                        + "Si presione cualquier numero\nNo presione 0"));
             }while(bndDetener != 0);
             mostrarEntidades(entidad);
             //System.out.println("Presione 1 para guardar 0 para cancelar");
@@ -427,15 +435,16 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                     "Elija una opcion\n" 
                     +"1---Agregar Entidad\n"
                     +"2---Modificar Entidad\n"
-                    + "3---listar Entidad\n"
+                    +"3---Listar Entidad\n"
                     +"4---Agregar Registros\n"
                     +"5---Eliminar Bases de Datos\n"
-                    + "6---Salir", "Menu de Opciones",3));
+                    + "6---Salir", "MENU DE OPCIONES",3));
         switch(opcion){
             case 1:
                 //Agregar Entidad
                 if(agregarEntidad()){
-                    JOptionPane.showMessageDialog(null, "Entidad Agregada Con Exito", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Entidad Agregada Con Exito", 
+                            "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
                     mostrarAgregarRegistros = true;
                 }
                 break;
@@ -450,7 +459,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                    if(listaEntidades.size()>0){
                        int tmpInt = 0;                       
                        tmpInt = Integer.parseInt(JOptionPane.showInputDialog(null, "¿Desea imprimir los detalles?\n"
-                               + "Si, presione 1.\nNo, presione 0?" ));
+                               +"Si, presione 1.\nNo, presione 0."));
                        if(tmpInt == 1){
                            for(Entidad entidad : listaEntidades){
                                mostrarEntidades(entidad);
@@ -463,7 +472,8 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                            }
                        }
                    }else{
-                       JOptionPane.showMessageDialog(null, "No Hay Entidades Registradas ", "INFORMACION",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null, "No Hay Entidades Registradas ", 
+                               "INFORMACION",JOptionPane.INFORMATION_MESSAGE);
                    }
                    break;
 
@@ -472,9 +482,11 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                 int indice = 0;
                 while(indice<1 || indice>listaEntidades.size()){
                     for(Entidad entidad : listaEntidades){
-                        txtArea.append(entidad.getIndice() + "---" + entidad.getNombre());
+                        txtArea.append("\nENTIDADES DISPONIBLES\n");
+                        txtArea.append("     "+entidad.getIndice() + "---" + entidad.getNombre()+"\n");
                     }                  
-                    indice = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione la Entidad", "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE));
+                    indice = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione la Entidad", 
+                            "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE));
                 }
                 iniciar(indice);
                 break;
@@ -482,28 +494,34 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
             case 5:
                 //ELiminar Base de Datos
                 int confirmar = 0;
-                confirmar = Integer.parseInt(JOptionPane.showInputDialog(null, "Esta seguro de borrar los archivos de base de datos, presione 1 de lo contrario cualquier numero para cancelar?\n Esta accion no se podra reversar", "ADVERTENCIA",JOptionPane.WARNING_MESSAGE ));
+                confirmar = Integer.parseInt(JOptionPane.showInputDialog(null, "¿ESTA SEGURO DE ELIMINAR LAS BASES DE DATOS? \n"
+                        +"Presione 1 para eliminar todo, de lo contrario cualquier numero para cancelar\n"
+                        + "UNA VEZ ELIMINADO YA NO SE PODRA RECUPERAR", "ADVERTENCIA",JOptionPane.WARNING_MESSAGE ));
                 if(confirmar == 1){
                     cerrarArchivos();
                         if(borrarArchivos()){
                             listaEntidades = null;
                             listaEntidades = new ArrayList<>();
                             mostrarAgregarRegistros = false;
-                            JOptionPane.showMessageDialog(null,"Base de Datos Eliminada con Exito", "ELIMINAR", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null,"BASES DE DATOS ELIMINADAS CON EXITO", 
+                                    "ELIMINADO", JOptionPane.INFORMATION_MESSAGE);
                         }
                 }
                 break;
                 
             case 6:
-                JOptionPane.showMessageDialog(null, "Gracias por Utilizar Nuestro Sistema", "GRACIAS", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Gracias por Utilizar Nuestro Sistema", 
+                        "HASTA PRONTO", JOptionPane.INFORMATION_MESSAGE);
                 break;
 
             default:
-                JOptionPane.showMessageDialog(null, "Opcion Invalida", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "OPCION INVALIDA", 
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
                 break;
         }
       }catch(Exception e){
-      JOptionPane.showMessageDialog(null, "Debe Seleccionar Una Opcion", "ERROR", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, "Debe Seleccionar Una Opcion", 
+              "ERROR", JOptionPane.ERROR_MESSAGE);
     }
         }       
 }
@@ -580,17 +598,15 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                 }
             }
            fichero = new RandomAccessFile(rutaBase + nombreFichero, "rw");
-           System.out.println("Bienvenidos");
            Atributos a = entidad.getAtributos().get(0);
            do{
                try{
-                    System.out.println("Seleccione una Opcion");
-                    System.out.println("1---Agregar");
-                    System.out.println("2---Listar");
-                    System.out.println("3---Modificar"); 
-                    System.out.println("4---Eliminar");
-                    System.out.println("0---Regresar al Menu Anterior");
-                    opcion = sc.nextInt();
+                    opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione una Opcion\n"
+                            + "1---Agregar\n"
+                            + "2---Listar\n"
+                            + "3---Modificar\n"
+                            + "4---Eiminar\n"
+                            + "0---Regresar al Menu Anterior","BIENVENIDO", 3));
                     switch(opcion){
                         case 0:
                             System.out.println("");
@@ -616,11 +632,13 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                             break;
                     }                  
                 }catch(Exception e){
-                    System.out.println("Error: " + e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Eliga una Opcion", 
+                            "ERROR", JOptionPane.ERROR_MESSAGE);
                 }           
             }while(opcion != 0);           
         }catch(Exception e){
-            System.out.println("Error: "+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "Eliga una Opcion", 
+                            "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -633,7 +651,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
             String tmpString = "";
             for(Atributos atributo : entidad.getAtributos()){
                 valido = false;
-                System.out.println("Ingrese "+ atributo.getNombre().trim());
+                System.out.println("Ingrese " + atributo.getNombre().trim());
                 while(!valido){
                     try{
                         switch(atributo.getTipoDato()){
@@ -695,7 +713,8 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                                     tmpString = sc.nextLine();
                                     longitud = tmpString.length();
                                     if(longitud <1 || longitud>1){
-                                        System.out.println("Solo se Permite un Caracter");
+                                        JOptionPane.showMessageDialog(null, "Solo se Permite un Caracter", 
+                                                "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                                     }
                                 }while(longitud<1 || longitud>1);
                                 byte caracter = (byte) tmpString.charAt(0);
@@ -704,7 +723,8 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                         }
                         valido = true;
                     }catch(Exception e){
-                        System.out.println("Error "+ e.getMessage()+ " al capturar tipo de dato, ingrese de nuevo el valoro: ");
+                        System.out.println("Error "+ e.getMessage()+ " al capturar tipo de dato, "
+                                + "ingrese de nuevo el valoro: ");
                         sc.nextLine();
                     }
                 }
@@ -713,7 +733,8 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
             resultado = true;
         }catch(Exception e){
             resultado = false;
-            System.out.println("Error al agregar el registro " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al agregar el registro " + e.getMessage(), 
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return resultado;
     }
@@ -736,7 +757,8 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
         try{
             long longitud = fichero.length();
             if(longitud <=0){
-                System.out.println("No hay Registros");
+                JOptionPane.showMessageDialog(null, "No Existen Registros", 
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             fichero.seek(0);
@@ -745,7 +767,8 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
             for(Atributos atributo : entidad.getAtributos()){
                linea += atributo.getNombre().toString().trim() + "\t\t";
             }
-            System.out.println(linea);
+            txtArea.append("-------------------------------------------------------\n");
+            txtArea.append(linea+"\n");
             while(longitud>= entidad.getBytes()){
                 linea = "";
                 for(Atributos atributo : entidad.getAtributos()){
@@ -791,10 +814,11 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                 }
                 fichero.readByte();
                 longitud-=entidad.getBytes();
-                System.out.println(linea);
+                txtArea.append(linea+"\n");
             } 
         }catch(Exception e){
-            System.out.println("Error: "+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: "+ e.getMessage(),
+                    "ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }
         
@@ -804,7 +828,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
             date = format.parse(strFecha);
         }catch(Exception e){
             date = null;
-            System.out.println("Error en Fecha"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error en Fecha"+ e.getMessage());
         }
         return date;
     }
@@ -814,10 +838,4 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
         strFecha = format.format(date);
         return strFecha;
     }  
-
-
-
-
-
-
 }
