@@ -40,7 +40,8 @@ public class Form extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Iniciar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -48,45 +49,24 @@ public class Form extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(263, 46, 74, 31));
 
-        txtArea.setBackground(javax.swing.UIManager.getDefaults().getColor("TabbedPane.background"));
+        txtArea.setBackground(new java.awt.Color(204, 204, 204));
         txtArea.setColumns(20);
         txtArea.setRows(5);
         jScrollPane1.setViewportView(txtArea);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 88, 609, 443));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
         );
 
         pack();
@@ -276,7 +256,7 @@ Scanner sc = new Scanner (System.in);
                 longitud = 0;
                 do{
                     strNombre = JOptionPane.showInputDialog(null, "Escriba el Nombre del Atributo no. "
-                            + (entidad.getCantidad()+1)+"ATRIBUTO", JOptionPane.INFORMATION_MESSAGE);
+                            + (entidad.getCantidad()+1), "ATRIBUTO", JOptionPane.INFORMATION_MESSAGE);
                     longitud = strNombre.length();
                     if(longitud<2 || longitud>30){
                          JOptionPane.showMessageDialog(null, "La Longitud del Nombre no es Valida (3 - 30)", 
@@ -342,6 +322,7 @@ Scanner sc = new Scanner (System.in);
             }    
             System.out.println("Presione una tecla para continuar...");
             System.in.read();
+            JOptionPane.showInputDialog(null, System.in.read(), "Presione aceptar para continuar...");
         }catch(Exception e){
             resultado = false;
             e.printStackTrace();
@@ -429,7 +410,7 @@ Scanner sc = new Scanner (System.in);
 void menuDefinicion(boolean mostrarAgregarRegistros){
     int opcion = 0;
     while(opcion !=6){ 
-        try{
+     //   try{
             opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
                     "Elija una opcion\n" 
                     +"1---Agregar Entidad\n"
@@ -518,10 +499,10 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                         "ERROR", JOptionPane.ERROR_MESSAGE);
                 break;
         }
-      }catch(Exception e){
-      JOptionPane.showMessageDialog(null, "Debe Seleccionar Una Opcion", 
-              "ERROR", JOptionPane.ERROR_MESSAGE);
-    }
+      //}catch(Exception e){
+      //JOptionPane.showMessageDialog(null, "Debe Seleccionar Una Opcion", 
+        //      "ERROR", JOptionPane.ERROR_MESSAGE);
+   // }
         }       
 }
 
@@ -650,29 +631,33 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
             String tmpString = "";
             for(Atributos atributo : entidad.getAtributos()){
                 valido = false;
-                System.out.println("Ingrese " + atributo.getNombre().trim());
+               // System.out.println("Ingrese " + atributo.getNombre().trim());
                 while(!valido){
                     try{
                         switch(atributo.getTipoDato()){
                             case INT:
-                                int tmpInt = sc.nextInt();
+                                int tmpInt = Integer.parseInt(JOptionPane.showInputDialog(null, 
+                                        "Ingrese "+ atributo.getNombre().trim()));
                                 fichero.writeInt(tmpInt);
-                                sc.nextLine();
+                               // sc.nextLine();
                                 break;
                             
                             case LONG:
-                                long tmpLong = sc.nextLong();
+                                long tmpLong = Long.parseLong(JOptionPane.showInputDialog(null, 
+                                        "Ingrese "+ atributo.getNombre().trim()));
                                 fichero.writeLong(tmpLong);
                                 break;
                             
                             case STRING:
                                 int longitud = 0;
                                 do{
-                                   tmpString = sc.nextLine();
+                                   tmpString = JOptionPane.showInputDialog(null, 
+                                        "Ingrese "+ atributo.getNombre().trim());
                                    longitud = tmpString.length();
                                    if(longitud <=1 || longitud>atributo.getLongitud()){
-                                       System.out.println("La longitud de "+ atributo.getNombre().trim() 
-                                                + " no es valida [1- "+ atributo.getLongitud() + "]");   
+                                       JOptionPane.showMessageDialog(null, "La longitud de "+ atributo.getNombre().trim() 
+                                                + " no es valida [1- "+ atributo.getLongitud() + "]",
+                                               "ERROR", JOptionPane.ERROR_MESSAGE);   
                                     }    
                                 }while(longitud <= 0 || longitud > atributo.getLongitud());
                                 bytesString = new byte[atributo.getLongitud()];
@@ -683,12 +668,14 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                                 break;
                             
                             case DOUBLE:
-                                double tmpDouble = sc.nextDouble();
+                                double tmpDouble = Double.parseDouble(JOptionPane.showInputDialog(null, 
+                                        "Ingrese "+ atributo.getNombre().trim()));
                                 fichero.writeDouble(tmpDouble);
                                 break;
                                 
                             case FLOAT:
-                                float tmpFloat = sc.nextFloat();
+                                float tmpFloat = Float.parseFloat(JOptionPane.showInputDialog(null, 
+                                        "Ingrese "+ atributo.getNombre().trim()));
                                 fichero.writeFloat(tmpFloat);
                                 break;
                             
@@ -696,8 +683,8 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                                 Date date = null;
                                 tmpString = "";
                                 while(date == null){
-                                    System.out.println("Formato de Fecha: " + formatoFecha);
-                                    tmpString = sc.nextLine();
+                                   //System.out.println("Formato de Fecha: " + formatoFecha);
+                                    tmpString = JOptionPane.showInputDialog(null, "Formato de Fecha: "+ formatoFecha);
                                     date = stringToDate(tmpString);
                                 }
                                 bytesString = new byte[atributo.getBytes()];
@@ -709,11 +696,12 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                                 
                             case CHAR:
                                 do{
-                                    tmpString = sc.nextLine();
+                                    tmpString = JOptionPane.showInputDialog(null, 
+                                        "Ingrese "+ atributo.getNombre().trim());
                                     longitud = tmpString.length();
                                     if(longitud <1 || longitud>1){
                                         JOptionPane.showMessageDialog(null, "Solo se Permite un Caracter", 
-                                                "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                                                "IMPORTANTE", JOptionPane.INFORMATION_MESSAGE);
                                     }
                                 }while(longitud<1 || longitud>1);
                                 byte caracter = (byte) tmpString.charAt(0);
@@ -722,9 +710,10 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                         }
                         valido = true;
                     }catch(Exception e){
-                        System.out.println("Error "+ e.getMessage()+ " al capturar tipo de dato, "
-                                + "ingrese de nuevo el valoro: ");
-                        sc.nextLine();
+                        //System.out.println("Error "+ e.getMessage()+ " al capturar tipo de dato, "
+                         //       + "ingrese de nuevo el valoro: ");
+                        JOptionPane.showInputDialog(null, "Error "+ e.getMessage()+ " al capturar tipo de dato, "
+                                + "ingrese de nuevo el valoro: ", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -764,7 +753,7 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
             byte[] tmpArrayByte;
             String linea = "";
             for(Atributos atributo : entidad.getAtributos()){
-               linea += atributo.getNombre().toString().trim() + "\t\t";
+               linea += atributo.getNombre().toString().trim() + "\t";
             }
             txtArea.append("-------------------------------------------------------\n");
             txtArea.append(linea+"\n");
@@ -774,40 +763,40 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                     switch(atributo.getTipoDato()){
                         case INT:
                             int tmpInt = fichero.readInt();
-                            linea += String.valueOf(tmpInt) + "\t\t";
+                            linea += String.valueOf(tmpInt) + "\t";
                             break;
                         
                         case LONG:
                             long tmpLong = fichero.readLong();
-                            linea += String.valueOf(tmpLong) + "\t\t";
+                            linea += String.valueOf(tmpLong) + "\t";
                             break;
                             
                         case STRING:
                             tmpArrayByte = new byte[atributo.getLongitud()];
                             fichero.read(tmpArrayByte);
                             String tmpString = new String(tmpArrayByte);
-                            linea += tmpString.trim() + "\t\t";
+                            linea += tmpString.trim() + "\t";
                             break;
                             
                         case DOUBLE:
                             double tmpDouble = fichero.readDouble();
-                            linea += String.valueOf(tmpDouble)+ "\t\t";
+                            linea += String.valueOf(tmpDouble)+ "\t";
                             break;
                         
                         case FLOAT:
                             float tmpFloat = fichero.readFloat();
-                            linea += String.valueOf(tmpFloat)+ "\t\t";
+                            linea += String.valueOf(tmpFloat)+ "\t";
                             break;
                         
                         case DATE:
                             tmpArrayByte = new byte[atributo.getBytes()];
                             fichero.read(tmpArrayByte);
                             tmpString = new String(tmpArrayByte);
-                            linea += tmpString.trim() + "\t\t";
+                            linea += tmpString.trim() + "\t";
                         
                         case CHAR:
                             char tmpChar = (char) fichero.readByte();
-                            linea += tmpChar + "\t\t";
+                            linea += tmpChar + "\t";
                             break;
                     }
                 }
@@ -816,8 +805,8 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                 txtArea.append(linea+"\n");
             } 
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error: "+ e.getMessage(),
-                    "ERROR",JOptionPane.ERROR_MESSAGE);
+           // JOptionPane.showMessageDialog(null, "Error: "+ e.getMessage(),
+             //       "ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }
         
