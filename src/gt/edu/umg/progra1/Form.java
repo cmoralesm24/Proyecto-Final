@@ -39,17 +39,22 @@ public class Form extends javax.swing.JFrame {
         txtArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PROYECTO 2");
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setToolTipText("");
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton1.setBackground(new java.awt.Color(153, 153, 255));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setText("Iniciar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(263, 46, 74, 31));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 74, 31));
 
         txtArea.setBackground(new java.awt.Color(204, 204, 204));
         txtArea.setColumns(20);
@@ -62,12 +67,14 @@ public class Form extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
         );
+
+        jPanel1.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -133,16 +140,6 @@ Scanner sc = new Scanner (System.in);
     static DateFormat format = new SimpleDateFormat(formatoFecha);
  
      private List<Entidad> listaEntidades = new ArrayList<>();
-    
-   /* public static void main(String[] args) {
-        Principal p = new Principal();
-        if(p.validarDefinicion()){
-            p.menuDefinicion(true);
-        }else{
-            p.menuDefinicion(false);
-        }
-        System.exit(0);
-    }*/
     
     
     boolean validarDefinicion(){
@@ -410,7 +407,7 @@ Scanner sc = new Scanner (System.in);
 void menuDefinicion(boolean mostrarAgregarRegistros){
     int opcion = 0;
     while(opcion !=6){ 
-     //   try{
+       try{
             opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
                     "Elija una opcion\n" 
                     +"1---Agregar Entidad\n"
@@ -499,10 +496,10 @@ void menuDefinicion(boolean mostrarAgregarRegistros){
                         "ERROR", JOptionPane.ERROR_MESSAGE);
                 break;
         }
-      //}catch(Exception e){
-      //JOptionPane.showMessageDialog(null, "Debe Seleccionar Una Opcion", 
-        //      "ERROR", JOptionPane.ERROR_MESSAGE);
-   // }
+      }catch(Exception e){
+      JOptionPane.showMessageDialog(null, "Debe Seleccionar Una Opcion", 
+              "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
         }       
 }
 
