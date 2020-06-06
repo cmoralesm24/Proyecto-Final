@@ -4,6 +4,8 @@ package gt.edu.umg.progra1;
 /**
  * @author daniel10522
  */
+
+//Definiendo tipo de datos a utilizar para los atributos
 public enum TipoDato {
     INT(1), LONG(2), STRING(3), DOUBLE(4), FLOAT(5), DATE(6), CHAR(7);
     

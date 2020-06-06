@@ -5,6 +5,7 @@ package gt.edu.umg.progra1;
  * @author daniel10522
  */
 public class Atributos {
+    //Definiendo variables privadas las cuales seran los atributos
     private int indice;
     private String nombre;
     private int valorTipoDato;
@@ -15,6 +16,7 @@ public class Atributos {
     private byte[] bytesNombre;
     private TipoDato tipoDato;
 
+    //Metos Getters ans Setters para acceder a los atributos
     public int getIndice() {
         return indice;
     }

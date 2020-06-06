@@ -1,12 +1,15 @@
 
 package gt.edu.umg.progra1;
 
+//Librerias
 import java.util.ArrayList;
 import java.util.List;
 
 /*
  * @author daniel10522
  */
+
+//Estableciendo atributos de entidad
 public class Entidad {
         private int indice;
         private String nombre;
@@ -16,7 +19,8 @@ public class Entidad {
         private int bytes = 1;
     
         private List<Atributos> atributos;
-
+        
+        //Metodos Getters and Setters
     public int getIndice() {
         return indice;
     }
