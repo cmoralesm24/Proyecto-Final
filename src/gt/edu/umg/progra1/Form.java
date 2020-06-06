@@ -82,7 +82,7 @@ public class Form extends javax.swing.JFrame {
         }else{
             menuDefinicion(false);
         }
-        System.exit(0);     //Salir
+        //System.exit(0);     //Salir
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
